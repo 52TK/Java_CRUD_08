@@ -75,8 +75,40 @@ public class Main {
 			}
 			
 			
+			else if (command.startsWith("article modify ")) {   // 게시물 수정기능
+				String[] commandBits = command.split(" ");
+				int id = Integer.parseInt(commandBits[2]);  // "1" -> 1 문장1에서 정수1로 변경
+				
+				Article foundArticle = null;
+				
+				for(int i = 0 ; i < articles.size(); i++) {  // 0 1 2 3 4
+					Article article = articles.get(i);
+					
+					if(article.id == id) {
+						foundArticle = article;  // 찾으면 덮어쓰겠다.
+						break;
+					}
+				}
+				
+				if(foundArticle == null) {
+					System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+					continue;
+				} 
+				
+				System.out.println("새 제목 : ");
+				String title = sc.nextLine();
+				System.out.println("새 내용 : ");
+				String body = sc.nextLine();
+				
+				foundArticle.title = title;
+				foundArticle.body = body;
+				
+				System.out.printf("%d번 게시물이 수정되었습니다.\n", foundArticle.id);
+				
+			}
+	
 			
-			else if (command.startsWith("article delete ")) {
+			else if (command.startsWith("article delete ")) {  // 게시물 삭제 기능
 				String[] commandBits = command.split(" ");
 				int id = Integer.parseInt(commandBits[2]);  // "1" -> 1 문장1에서 정수1로 변경
 				
